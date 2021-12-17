@@ -16,17 +16,26 @@ const input = document.getElementById('user-number');
 
 function main(userChoice){
     
-    const userNumber = document.getElementById('user-number').value;
-    const pcNumber = getRandomNumber(1,5);
-    const sum = userNumber + pcNumber;
-
-    let even = checkEqualEven(sum);
-    let message = "";
+    const userNumber = parseInt(document.getElementById('user-number').value);
+    if (1 < userNumber && userNumber < 5) {
     
-    even ? message = "PARI!" : message = "DISPARI!";
-    message += "\n Utente: "+userNumber +" Pc: "+pcNumber + ". Tot: "+sum;
-    userChoice == even ? message += "HAI VINTO!" :  message += "HAI PERSO!";
-    alert(message);
+        const pcNumber = getRandomNumber(1,5);
+        const sum = userNumber + pcNumber;
+        
+        let odd = checkEqualOdd(sum);
+        console.log("odd: "+ odd);
+        console.log("userChoice: "+ userChoice);
+        let message = "";
+        
+        odd ? message = "PARI!" : message = "DISPARI!";
+        message += "\n Utente: "+userNumber +" Pc: "+pcNumber + ". Tot: "+sum + "\n";
+        userChoice == odd ? message += "HAI VINTO!" :  message += "HAI PERSO!";
+        alert(message);
+    }
+    else {
+        input.classList.add("error");
+        alert("Inserisci un numero compreso tra 1 e 5");
+    }
 }
 
 
@@ -34,8 +43,8 @@ function getRandomNumber(rmin, rmax){
     return Math.floor(Math.random()* (rmax - rmin + 1)) + rmin;
 }
 
-function checkEqualEven(number){
-    return number % 2 == 0;
+function checkEqualOdd(number){
+    return (number % 2 != 0);
 }
 
 
@@ -45,8 +54,7 @@ select.addEventListener("change", function(event){
 
     if (evenOdd != '-1'){
         let selectedOption = evenOdd;
-       numberBox.classList.add("active");
-
+        numberBox.classList.add("active");
         submitBtn.addEventListener("click", function(event){
             main(selectedOption);
         });
