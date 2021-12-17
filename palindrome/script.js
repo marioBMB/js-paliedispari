@@ -4,7 +4,6 @@
     Creare una funzione per capire se la parola inserita è palindroma 
 
     N.B. dobbiamo non considerare gli spazi e le lettere maiuscole, quindi ad es.
-
     "a Toyota" è palindroma.
 
     N.B.2: non si può utilizzare Array.reverse()!
@@ -14,11 +13,16 @@
 function checkPalindrome(string){
 
     string = removeWhiteSpaces(string.trim().toLowerCase());
-    let lastIndex = Math.ceil(string.length / 2);  /* ricordarsi sempre che si parte da 0 */
+    console.log(string);
+    let endIndex = Math.ceil(string.length / 2);  /* ricordarsi sempre che si parte da 0 */
 
     /* funziona sia per stringhe pari che dispari */
     
-    for (let i = 0; i < lastIndex; i++ ){ /* confronta caratteri in posizioni complementari */
+    for (let i = 0; i < endIndex; i++ ){ /* confronta caratteri in posizioni complementari */
+
+        console.log("i= " + i);
+        console.log(string[i]);
+        console.log(string[string.length - 1 - i]);
         if (string[i] != string[string.length - 1 - i]){
             return false;
         }
@@ -36,7 +40,7 @@ function checkPalindrome2(string){
 }
 
 
-/* come la precedente ma meno efficiente, per via del pop() */
+/* come la precedente ma meno efficiente, per via di array + pop() */
 function checkPalindrome3(string){
 
     string = string.trim().toLowerCase();
@@ -69,16 +73,13 @@ function reverseString(string){
 }
 
 function removeWhiteSpaces(string){
-    let whiteSpaces = 0;
-
+    let filteredString = "";
     for(let i = 0; i < string.length; i++){
-        if (string[i] == ""){
-            whiteSpaces++;
-            string[i] = string[i+1];  //shift sinistro
+        if (string[i] != " "){
+            filteredString += string[i];
         }
     }
-    string = string.substring(0, str.length - whiteSpaces);
-    return string;
+    return filteredString;
 }
 
 function removeWhiteArrCells(strArr){
@@ -90,3 +91,21 @@ function removeWhiteArrCells(strArr){
     }
     return strArr;
 }
+
+
+/*********************** 
+        MAIN
+**********************/
+
+function main (){
+
+    var userString = prompt("Controllo stringhe palindrome. Inserisci una stringa per la verifica");
+    if (checkPalindrome(userString)){
+        alert('La stringa "' + userString + '" è palindroma');
+    }
+    else {
+        alert('La stringa "' + userString + '" non è palindroma');
+    }
+}
+
+main();
