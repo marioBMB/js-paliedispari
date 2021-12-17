@@ -1,4 +1,4 @@
-/* 
+/*
     L’utente sceglie pari o dispari e inserisce un numero da 1 a 5.
     Generiamo un numero random (sempre da 1 a 5) per il computer (usando una funzione).
     Sommiamo i due numeri
@@ -7,7 +7,7 @@
 */
 
 
-const select = document.getElementById("even-odd");
+let select = document.getElementById("even-odd");
 const numberBox = document.getElementById("number");
 const submitBtn = document.getElementById("submit");
 let input = document.getElementById('user-number');
