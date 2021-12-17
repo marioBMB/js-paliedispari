@@ -7,66 +7,51 @@
 */
 
 
-let select = document.getElementById("even-odd");
+const select = document.getElementById("even-odd");
 const numberBox = document.getElementById("number");
 const submitBtn = document.getElementById("submit");
-let input = document.getElementById('user-number');
-let selectedOption = "-1";
-let userNumber = 0;
-let sum = 0;
-let pcNumber;
+const input = document.getElementById('user-number');
+
+const selectedOption = "-1";
+
+
+function main(){
+    
+    const userNumber = document.getElementById('user-number').value;
+    const pcNumber = getRandomNumber(1,5);
+    const sum = userNumber + pcNumber;
+
+    let even = checkEqualEven(sum);
+    let message = "";
+    
+    even ? message = "PARI!" : message = "DISPARI!";
+    message += "\n Utente: "+userNumber +" Pc: "+pcNumber + ". Tot: "+sum;
+    selectedOption == even ? message += "HAI VINTO!" :  message += "HAI PERSO!";
+    alert(message);
+}
+
+
+function getRandomNumber(rmin, rmax){
+    return Math.floor(Math.random()* (rmax - rmin + 1)) + rmin;
+}
+
+function checkEqualEven(number){
+    return number % 2 == 0;
+}
 
 
 select.addEventListener("change", function(event){
 
     var evenOdd = select.options[select.selectedIndex].value;
 
+    console.log(evenOdd);
+
     if (evenOdd != '-1'){
        selectedOption = evenOdd;
        numberBox.classList.add("active");
 
         submitBtn.addEventListener("click", function(event){
-            userNumber = document.getElementById('user-number').value;
             main();
         });
     }
 });
-
-
-function main (){
-
-    pcNumber = getRandomNumber(1,5);
-    sum = userNumber + pcNumber;
-    message = "Utente: "+userNumber + " Pc: "+pcNumber + ". Tot: "+sum;
-    even = checkEqualEven(sum); 
-
-    if (even){
-        message = "PARI! " + message;
-    }
-    else {
-        message = "DISPARI! "+ message;
-    }
-
-    message += "<br>";
-
-    if (selectedOption == even){
-        message += "HAI VINTO!";
-    }
-    else {
-        message += "HAI PERSO!";
-    }
-    
-}
-
-
-
-
-function getRandomNumber(rmin, rmax){
-
-    return Math.floor(Math.random()* (rmax - rmin + 1)) + rmin;
-}
-
-function checkEqualEven(number){
-
-    return number % 2 == 0;
-}
