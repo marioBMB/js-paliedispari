@@ -12,10 +12,9 @@ const numberBox = document.getElementById("number");
 const submitBtn = document.getElementById("submit");
 const input = document.getElementById('user-number');
 
-const selectedOption = "-1";
 
 
-function main(){
+function main(userChoice){
     
     const userNumber = document.getElementById('user-number').value;
     const pcNumber = getRandomNumber(1,5);
@@ -26,7 +25,7 @@ function main(){
     
     even ? message = "PARI!" : message = "DISPARI!";
     message += "\n Utente: "+userNumber +" Pc: "+pcNumber + ". Tot: "+sum;
-    selectedOption == even ? message += "HAI VINTO!" :  message += "HAI PERSO!";
+    userChoice == even ? message += "HAI VINTO!" :  message += "HAI PERSO!";
     alert(message);
 }
 
@@ -44,14 +43,12 @@ select.addEventListener("change", function(event){
 
     var evenOdd = select.options[select.selectedIndex].value;
 
-    console.log(evenOdd);
-
     if (evenOdd != '-1'){
-       selectedOption = evenOdd;
+        let selectedOption = evenOdd;
        numberBox.classList.add("active");
 
         submitBtn.addEventListener("click", function(event){
-            main();
+            main(selectedOption);
         });
     }
 });
